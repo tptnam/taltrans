@@ -1,0 +1,36 @@
+# root .gitignore
+node_modules
+dist
+*.local
+.turbo
+.vscode
+
+# env files
+**/.env
+**/.env.* 
+
+# except .env.example
+!**/.env.example
+
+
+# Next.js
+**/.next/
+**/out/
+
+# Testing
+**/coverage
+
+# Misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+**/next-env.d.ts
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vercel
+.vercel
