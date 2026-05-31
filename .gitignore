@@ -1,5 +1,6 @@
 # root .gitignore
 node_modules
+.pnpm-store/
 dist
 *.local
 .turbo

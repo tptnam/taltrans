@@ -1,8 +1,13 @@
-import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
+import { ApplicationBootstrap } from './core/app'
+import { getBootstrapConfig } from './config/bootstrap.config'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
-  await app.listen(process.env.PORT ?? 3001)
+  const app = new ApplicationBootstrap(AppModule, getBootstrapConfig())
+  await app.start()
 }
-bootstrap()
+
+bootstrap().catch((error: unknown) => {
+  console.error('Failed to start application:', error)
+  process.exit(1)
+})

@@ -1,10 +1,17 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, NestModule } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import Core from './core'
 
-@Module({
-  imports: [],
+const appMetadata = Core.Nest.ModuleMetadata.forApp()
+
+@Core.Nest.Decorators.Module({
+  ...appMetadata,
   controllers: [AppController],
-  providers: [AppService],
+  providers: [...appMetadata.providers, AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(Core.Logging.LoggingMiddleware).forRoutes('*')
+  }
+}
